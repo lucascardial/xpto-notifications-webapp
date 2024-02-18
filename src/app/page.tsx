@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import { Button } from "@mui/material";
 
 export default function Home() {
   return (
@@ -89,6 +90,9 @@ export default function Home() {
             Instantly deploy your Next.js site to a shareable URL with Vercel.
           </p>
         </a>
+        <Button variant="contained" color="primary">
+          Hello World
+        </Button>
       </div>
     </main>
   );
