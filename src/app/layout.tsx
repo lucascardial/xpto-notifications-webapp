@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import theme from '@/theme';
 import { ErrorUiProvider } from '@/providers/ErrorUiProvider/ErrorUiProvider';
 import TanStackQueryProvider from '@/providers/QueryClientProvider';
+import LocalizationProvider from '@/providers/LocalizationProvider';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +25,9 @@ export default function RootLayout({
       <AppRouterCacheProvider>
         <ThemeProvider theme={theme}>
           <TanStackQueryProvider>
-            {children}
+            <LocalizationProvider>
+              {children}
+            </LocalizationProvider>
           </TanStackQueryProvider>
           <ErrorUiProvider />
         </ThemeProvider>
