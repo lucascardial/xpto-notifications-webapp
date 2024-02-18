@@ -14,7 +14,8 @@ export default function ContactImporsTable({ data: initialData }: ContactImporsT
       const { data } = await ApiClient.get('/v1/contacts/imports');
       return data
     },
-    initialData
+    initialData,
+    refetchInterval: 10000
   });
   return <TableContainer component={Paper}>
   <Table sx={{ minWidth: 650 }} aria-label="simple table">
