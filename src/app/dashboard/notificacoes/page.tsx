@@ -2,7 +2,7 @@ import { Container, Typography } from "@mui/material";
 import NotificationsTable from "./components/NotificationsTable";
 
 async function getData() {
-  const res = await fetch('http://127.0.0.1:8000/api/v1/contacts/notifications', { cache: 'no-store' })
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/contacts/notifications`, { cache: 'no-store' })
  
   if (!res.ok) {
     throw new Error('Failed to fetch data')
