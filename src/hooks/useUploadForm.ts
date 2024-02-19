@@ -1,4 +1,4 @@
-import axios, { Axios, AxiosProgressEvent, AxiosResponse } from "axios";
+import { Axios, AxiosProgressEvent, AxiosResponse } from "axios";
 import { useState } from "react";
 
 export const useUploadForm = (axiosClient: Axios) => {
