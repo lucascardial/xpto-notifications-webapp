@@ -1,7 +1,7 @@
 'use client';
 
 import { ApiClient } from "@/http-clients/ApiAxiosClient";
-import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Button, IconButton, Box, Pagination } from "@mui/material";
+import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Button, IconButton, Box, Pagination, FormControl, Select, MenuItem, InputLabel, Divider, SelectChangeEvent } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
@@ -25,11 +25,19 @@ export default function NotificationsTable({ notifications }: NotificationsTable
   const [totalPages, setTotalPages] = useState(0);
   const [editNotification, setEditNotification] = useState(null);
   const [deleteNotification, setDeleteNotification] = useState(null);
+  const [statusFilter, setStatusFilter] = useState<any>('pending');
+
+  const statuses = [
+    { value: 'pending', label: 'Pendente' },
+    { value: 'sent', label: 'Enviado' },
+    { value: 'failed', label: 'Falhou' },
+  ];
+
 
 
   const { data } = useQuery({
-    queryKey: ['notifications', page],
-    queryFn: () => ApiClient.get(`v1/contacts/notifications?page=${page}`).then(({data}) => {
+    queryKey: ['notifications', page, statusFilter],
+    queryFn: () => ApiClient.get(`v1/contacts/notifications?page=${page}&status=${statusFilter}`).then(({data}) => {
       setTotalPages(data.last_page || 0)
       return data
     }),
@@ -43,10 +51,30 @@ export default function NotificationsTable({ notifications }: NotificationsTable
     });
   }
 
+  const handleSelectChange = (event: SelectChangeEvent) => {
+    const value = event.target.value;
+    if (value) {
+      setStatusFilter(value);
+    }
+  }
+
   return (
     <Box>
       {deleteNotification !== null && <DeleteNotificationModal notification={deleteNotification} onDeleted={onDelete} onClose={() => setDeleteNotification(null)}  />}
       {editNotification !== null && <EditNotificationModal onClose={() => setEditNotification(null)} notification={editNotification} />}
+      <FormControl>
+        <InputLabel id="status-select-label">Situação</InputLabel>
+        <Select
+          sx={{ width: '400px'}}
+          labelId="status-select-label"
+          label="Situação"
+          onChange={handleSelectChange}
+          value={statusFilter}
+          >
+          {statuses.map((status) => <MenuItem key={status.value} value={status.value}>{status.label}</MenuItem>)}
+        </Select>
+      </FormControl>
+      <Divider sx={{ margin: '20px 0px'}} />
       <TableContainer>
         <Table>
           <TableHead>
@@ -68,8 +96,8 @@ export default function NotificationsTable({ notifications }: NotificationsTable
                 </TableCell>
                 <TableCell>{dayjs(notification.schedule_date).format('DD/MM/YY HH:mm')}</TableCell>
                 <TableCell>
-                  <Button onClick={() => setEditNotification(notification)}>Editar</Button>
-                  <IconButton aria-label="delete" onClick={() => setDeleteNotification(notification)}>
+                  <Button disabled={notification.status !== 'pending'} onClick={() => setEditNotification(notification)}>Editar</Button>
+                  <IconButton disabled={notification.status !== 'pending'} aria-label="delete" onClick={() => setDeleteNotification(notification)}>
                     <DeleteIcon />
                   </IconButton>
                 </TableCell>
