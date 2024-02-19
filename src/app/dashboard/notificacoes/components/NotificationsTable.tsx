@@ -7,6 +7,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import EditNotificationModal from "./EditNotificationModal";
 import dayjs from "dayjs";
+import { reactQueryClient } from "@/providers/QueryClientProvider";
+import DeleteNotificationModal from "./DeleteNotificationModal";
 
 type Notification = {
   id: string;
@@ -20,22 +22,30 @@ type NotificationsTableProps = {
 
 export default function NotificationsTable({ notifications }: NotificationsTableProps) {
   const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const [editNotification, setEditNotification] = useState(null);
+  const [deleteNotification, setDeleteNotification] = useState(null);
 
 
   const { data } = useQuery({
     queryKey: ['notifications', page],
     queryFn: () => ApiClient.get(`v1/contacts/notifications?page=${page}`).then(({data}) => {
-      setTotalPages(data.last_page)
+      setTotalPages(data.last_page || 0)
       return data
     }),
     initialData: notifications,
   });
-  
+
+  const onDelete = () => {
+    setDeleteNotification(null)
+    reactQueryClient.invalidateQueries({
+      queryKey: ['notifications', page]
+    });
+  }
 
   return (
     <Box>
+      {deleteNotification !== null && <DeleteNotificationModal notification={deleteNotification} onDeleted={onDelete} onClose={() => setDeleteNotification(null)}  />}
       {editNotification !== null && <EditNotificationModal onClose={() => setEditNotification(null)} notification={editNotification} />}
       <TableContainer>
         <Table>
@@ -59,7 +69,7 @@ export default function NotificationsTable({ notifications }: NotificationsTable
                 <TableCell>{dayjs(notification.schedule_date).format('DD/MM/YY HH:mm')}</TableCell>
                 <TableCell>
                   <Button onClick={() => setEditNotification(notification)}>Editar</Button>
-                  <IconButton aria-label="delete">
+                  <IconButton aria-label="delete" onClick={() => setDeleteNotification(notification)}>
                     <DeleteIcon />
                   </IconButton>
                 </TableCell>
@@ -69,7 +79,7 @@ export default function NotificationsTable({ notifications }: NotificationsTable
         </Table>
       </TableContainer>
 
-      <Pagination sx={{ margin: '20px 0px'}} count={totalPages} variant="outlined" onChange={(_, value) => setPage(value)} />
+      { totalPages > 1 && <Pagination sx={{ margin: '20px 0px'}} count={totalPages} variant="outlined" onChange={(_, value) => setPage(value)} />}
     </Box>
 
   );
