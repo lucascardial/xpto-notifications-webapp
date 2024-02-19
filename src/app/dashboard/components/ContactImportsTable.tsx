@@ -2,6 +2,7 @@
 import { ApiClient } from "@/http-clients/ApiAxiosClient";
 import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
+import dayjs from "dayjs";
 
 type ContactImporsTableProps = {
   data: any[];
@@ -38,7 +39,7 @@ export default function ContactImporsTable({ data: initialData }: ContactImporsT
           </TableCell>
           <TableCell align="right">{row.total_lines}</TableCell>
           <TableCell align="right">{row.status}</TableCell>
-          <TableCell align="right">{row.date}</TableCell>
+          <TableCell align="right">{dayjs(row.date).format('DD/MM/YY HH:mm')}</TableCell>
         </TableRow>
       ))}
     </TableBody>

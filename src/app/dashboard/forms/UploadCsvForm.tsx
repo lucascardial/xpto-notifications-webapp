@@ -49,10 +49,12 @@ export default function UploadCsvForm() {
     formData.append('attachment', file as Blob);
 
     await uploadForm('/v1/contacts/upload-csv', formData);
+
+    document.querySelector('#upload-csv-form input')?.setAttribute('value', '');
   }
 
   const handleSubmit = async () => {
-    
+
   }
 
   return (

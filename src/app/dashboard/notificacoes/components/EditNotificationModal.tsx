@@ -31,7 +31,7 @@ export default function EditNotificationModal({onClose, notification}: EditNotif
   const handleSubmit = async () => {
       await ApiClient.put(`v1/contacts/notifications/${notification.id}`, {
         ...formData,
-        schedule_date: dayjs(formData.schedule_date).format('YYYY-MM-DD HH:mm:ss')
+        schedule_date: dayjs(formData.schedule_date)
       });
       
       reactQueryClient.invalidateQueries({ queryKey: ['notifications']});

@@ -56,7 +56,7 @@ export default function NotificationsTable({ notifications }: NotificationsTable
                 <TableCell>
                   <div dangerouslySetInnerHTML={{ __html: notification.content}}></div>
                 </TableCell>
-                <TableCell>{dayjs(notification.schedule_date).format('DD/MM/YY H:m')}</TableCell>
+                <TableCell>{dayjs(notification.schedule_date).format('DD/MM/YY HH:mm')}</TableCell>
                 <TableCell>
                   <Button onClick={() => setEditNotification(notification)}>Editar</Button>
                   <IconButton aria-label="delete">
