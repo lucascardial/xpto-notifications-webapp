@@ -1,9 +1,12 @@
-import { Box, Button, Container, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
+import { Box, Container, Typography } from "@mui/material"
 import UploadCsvForm from "./forms/UploadCsvForm";
 import ContactImporsTable from "./components/ContactImportsTable";
 
+export const dynamic = "force-dynamic";
+
+
 async function getData() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/contacts/imports`, { cache: 'no-store' })
+  const res = await fetch(`${process.env.SRV_API_URL}/v1/contacts/imports`, { cache: 'no-store' })
  
   if (!res.ok) {
     throw new Error('Failed to fetch data')

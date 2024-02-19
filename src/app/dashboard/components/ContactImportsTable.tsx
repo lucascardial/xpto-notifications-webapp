@@ -15,7 +15,7 @@ export default function ContactImporsTable({ data: initialData }: ContactImporsT
       return data
     },
     initialData,
-    refetchInterval: 10000
+    refetchInterval: 5000
   });
   return <TableContainer component={Paper}>
   <Table sx={{ minWidth: 650 }} aria-label="simple table">

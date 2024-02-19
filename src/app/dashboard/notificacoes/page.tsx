@@ -1,8 +1,9 @@
 import { Container, Typography } from "@mui/material";
 import NotificationsTable from "./components/NotificationsTable";
 
+export const dynamic = "force-dynamic";
 async function getData() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/contacts/notifications`, { cache: 'no-store' })
+  const res = await fetch(`${process.env.SRV_API_URL}/v1/contacts/notifications`, { cache: 'no-store' })
  
   if (!res.ok) {
     throw new Error('Failed to fetch data')
