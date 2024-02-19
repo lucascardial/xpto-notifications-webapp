@@ -4,6 +4,9 @@ Este documento fornece uma visão geral e instruções para o desenvolvimento, e
 
 [wiki](https://github.com/lucascardial/xpto-notifications-webapp/wiki/1.-Home)
 
+## Executando a Aplicação
+Por favor, para executar este projeto em conjunto com o projeto de api, siga as instruções [ESSAS INSTRUÇÕES](https://github.com/lucascardial/xpto-notifications-docker). Neste repositório você encontrará as instruções para executar o projeto em um ambiente dockerizado.
+
 ## Visão Geral
 
 Este aplicativo frontend de estudo é construído usando Next.js, um framework React de código aberto que facilita a construção de aplicativos da web com React. Ele fornece funcionalidades como renderização do lado do servidor, geração estática e dinâmica de páginas, roteamento automático e muito mais.
