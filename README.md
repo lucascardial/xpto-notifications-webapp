@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Documentação do Aplicativo Frontend - Next.js
 
-## Getting Started
+Este documento fornece uma visão geral e instruções para o desenvolvimento, execução e manutenção do aplicativo frontend construído com Next.js.
 
-First, run the development server:
+## Visão Geral
+
+Este aplicativo frontend de estudo é construído usando Next.js, um framework React de código aberto que facilita a construção de aplicativos da web com React. Ele fornece funcionalidades como renderização do lado do servidor, geração estática e dinâmica de páginas, roteamento automático e muito mais.
+
+## Pré-requisitos
+
+Antes de iniciar o desenvolvimento ou execução do aplicativo frontend, verifique se o seguinte software está instalado em sua máquina:
+
+- Node.js (v20.x ou superior)
+- npm (gerenciador de pacotes do Node.js)
+- yarn
+
+## Instalação
+
+1. Clone o repositório do aplicativo:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/lucascardial/xpto-notifications-webapp.git
+cd xpto-notifications-webapp
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Instale as dependências do projeto:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Execução Local
 
-## Learn More
+Para executar o aplicativo frontend em seu ambiente local, utilize o seguinte comando:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+yarn dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Isso iniciará o servidor de desenvolvimento do Next.js e você poderá acessar o aplicativo em seu navegador através do endereço `http://localhost:3000`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Estrutura do Projeto
 
-## Deploy on Vercel
+A estrutura do projeto segue as convenções padrão do Next.js, com os principais diretórios e arquivos sendo:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `app/`: Contém as páginas do aplicativo, cada arquivo `.page.tsx` neste diretório corresponde a uma rota no aplicativo.
+- `hooks`: Contém os hooks personalizados que podem ser utilizados em diferentes partes do aplicativo.
+- `http-clients`: Contém os clientes HTTP personalizados que podem ser utilizados para fazer chamadas de API.
+- `providers`: Contém os provedores de contexto personalizados que podem ser utilizados para compartilhar dados entre componentes.
+- `theme.ts`: Arquivo que contém as [customizações de tema](https://mui.com/material-ui/customization/theming/) do [Material MUI](https://mui.com/material-ui/).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Contribuição
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou enviar um pull request para melhorar o aplicativo frontend.
+
+## Licença
+
+Este aplicativo frontend é licenciado sob a [Licença MIT](https://pt.wikipedia.org/wiki/Licen%C3%A7a_MIT).
